@@ -1,0 +1,31 @@
+
+services:
+
+  app:
+    build:
+      context: .
+      target: development
+    ports:
+      - "${PORT:-3000}:3000"
+    env_file: .env
+    volumes:
+      - .:/app                   
+      - /app/node_modules        
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:16-alpine
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    environment:
+      POSTGRES_USER:     ${POSTGRES_USER:-user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-password}
+      POSTGRES_DB:       ${POSTGRES_DB:-boilerplate}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+volumes:
+  postgres_data:

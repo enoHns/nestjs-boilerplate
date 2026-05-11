@@ -1,0 +1,37 @@
+# Dependencies
+node_modules
+
+# Compiled output
+dist
+build
+
+# Environment files (never bake secrets into the image)
+.env
+.env.*
+!.env.example
+
+# Git
+.git
+.gitignore
+
+# Logs
+logs
+*.log
+
+# Tests
+coverage
+test
+
+# IDE / OS
+.vscode
+.idea
+.DS_Store
+
+# Docker files (not needed inside the image)
+Dockerfile
+docker-compose*.yml
+docker-compose*.yaml
+
+# Misc
+*.md
+README*
